@@ -28,7 +28,7 @@ app.get('/fetchEvents',async (req,res)=>{
 
 
 app.get('/createEventTable',async(req,res)=>{
-    const query = `create table Events(id INT UNSIGNED NOT NULL auto_increment, event json DEFAULT NULL, unique(id));`;
+    const query = `create table Events(blockHash varchar(250), event json DEFAULT NULL, unique(blockHash));`;
     connection.query(query,(err, results, fields) => {
         if (err) {
         return res.send(err.message)
@@ -39,9 +39,30 @@ app.get('/createEventTable',async(req,res)=>{
     })
 })
 
+const queryDB=(req,res)=>{
+
+}
+
 app.get('/pushToDb',async(req,res)=>{
 
+    const events = await fetchAllEvents()
+   
+    let query = `INSERT INTO Events(blockHash, event) VALUES`;
+    events.forEach((e)=>{
+    
+        query += `('${e.blockHash}','${JSON.stringify(e)}'),`
 
+    })
+    console.log(query)
+
+    connection.query(`${query.slice(0,-1)}`,(err, results, fields) => {
+        if (err) {
+            return res.send(err.message)
+        }else{
+            res.send(results)
+        }
+        
+    })
 })
 
 app.listen(port, () => {           
