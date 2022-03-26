@@ -19,11 +19,12 @@ app.get('/',async (req, res) => {
 
 
 app.get('/fetchEvents',async (req,res)=>{
-   
     const events = await fetchAllEvents()
     console.log(events)
     res.send(events)
 })
+
+
 
 
 
@@ -39,9 +40,10 @@ app.get('/createEventTable',async(req,res)=>{
     })
 })
 
-const queryDB=(req,res)=>{
 
-}
+
+
+
 
 app.get('/pushToDb',async(req,res)=>{
 
@@ -53,7 +55,6 @@ app.get('/pushToDb',async(req,res)=>{
         query += `('${e.blockHash}','${JSON.stringify(e)}'),`
 
     })
-    console.log(query)
 
     connection.query(`${query.slice(0,-1)}`,(err, results, fields) => {
         if (err) {
