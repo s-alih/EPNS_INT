@@ -27,12 +27,6 @@ app.get('/',async (req, res) => {
 });
 
 
-// app.get('/fetchAndStoreEvents',async (req,res)=>{
-//     const events = await fetchAllEvents()
-//     console.log(events)
-//     res.send(events)
-// })
-
 
 app.get("/invoke",async(req,res)=>{
 
@@ -62,11 +56,12 @@ app.get('/fetchAndStoreEvents',async(req,res)=>{
     events.forEach((e)=>{
         query += `('${e.blockHash}','${JSON.stringify(e)}'),`
     })
+    console.log(events)
     connection.query(`${query.slice(0,-1)}`,(err, results, fields) => {
         if (err) {
             return res.send(err.message)
         }else{
-            res.send(events)
+            res.render("event",{"events":events})
         }
         
     })
