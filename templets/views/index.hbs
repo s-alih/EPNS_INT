@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+       
+     <script>
+        function getEvents(){
+            window.location.href = `/fetchAndStoreEvents`
+        }
+        function book2(){
+            
+            const flight = '{{second}}'
+            const destination = '{{destination}}'
+            const departure = '{{departure}}'
+            const time = '12/2/2020'
+            const price = '310'
+            window.location.href = `/fetchAndStoreEvents`
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <button>Invoke Smart Contract</button>
+    <button onclick="getEvents()">Get All Events</button>
+</body>
+</html>
