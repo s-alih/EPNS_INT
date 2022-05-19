@@ -1,13 +1,12 @@
 const express = require('express'); 
 const hbs = require('hbs');
-const async = require('hbs/lib/async');
 const path = require('path')
 
 const app = express();   
 const connection = require('./connections/database')
 require('../src/connections/database')
 require('dotenv').config();
-const fetchAllEvents = require('./utils/eventHandlers')
+const {fetchAllEvents,fetchTokenBalance} = require('./utils/eventHandlers')
 
 
 const viewsPath = path.join(__dirname,'../templets/views')
@@ -47,7 +46,17 @@ app.get('/createEventTable',async(req,res)=>{
         
     })
 })
+app.get('/fetchEvents',async(req,res)=>{
+    const events = await fetchAllEvents()
+    res.render("event",{"events":events})
+})
 
+
+
+app.get('/getTokenBalance',async(req,res)=>{
+   const data = await fetchTokenBalance()
+   res.sendStatus(200).send(data)
+})
 
 
 app.get('/fetchAndStoreEvents',async(req,res)=>{

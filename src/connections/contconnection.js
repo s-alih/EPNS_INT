@@ -12,4 +12,4 @@ const provider = new ethers.providers.InfuraProvider(network, {
     
 const contract = new ethers.Contract(contractAddress, contractAbi, provider);  
 
-module.exports = {provider,contract};
+module.exports = {provider,contract,ethers};
