@@ -53,14 +53,6 @@ const fetchTokenBalance = async()=>{
         })
 
     }
-
-    
-    
-    // now it's time to cache ac in between queries in a shared memory
-    // and refresh it when any subsriber is added/or removed
-    // and probably purge it every X minutes
-    
-    // on each block
     
 
 }
